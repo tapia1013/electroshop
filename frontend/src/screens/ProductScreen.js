@@ -11,7 +11,7 @@ import Message from '../components/Message';
 const ProductScreen = () => {
   // [0,1,2,3,4,5] 
   // <option> 0 -> 1, then current is 1 + 1 -> 2 add another -> 3
-  const [qty, setQty] = useState(0)
+  const [qty, setQty] = useState(1)
 
   // match.params replacement
   const params = useParams();

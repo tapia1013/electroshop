@@ -20,7 +20,9 @@ const cartItemsFromStorage = localStorage.getItem('cartItems') ? JSON.parse(loca
 
 // This is where we can get our cartItems, token, etc from the cartActions getState()
 const initialState = {
-  cart: cartItemsFromStorage
+  cart: {
+    cartItems: cartItemsFromStorage
+  }
 }
 
 const middleware = [thunk]

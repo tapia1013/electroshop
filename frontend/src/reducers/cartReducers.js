@@ -9,6 +9,8 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
     case CART_ADD_ITEM:
       // If item is already in cart we need to create below
       const item = action.payload
+
+      // console.log(state.cartItems);
       // if it exists
       const existItem = state.cartItems.find(x => x.product === item.product)
 
