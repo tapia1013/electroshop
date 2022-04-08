@@ -32,10 +32,14 @@ const cartItemsFromStorage = localStorage.getItem('cartItems') ? JSON.parse(loca
 // Save userINFO in LS
 const userInfoFromStorage = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null
 
+// load address from LS
+const shippingAddressFromStorage = localStorage.getItem('shippingAddress') ? JSON.parse(localStorage.getItem('shippingAddress')) : {}
+
 // This is where we can get our cartItems, token, etc from the cartActions getState()
 const initialState = {
   cart: {
-    cartItems: cartItemsFromStorage
+    cartItems: cartItemsFromStorage,
+    shippingAddress: shippingAddressFromStorage
   },
   userLogin: {
     userInfo: userInfoFromStorage
