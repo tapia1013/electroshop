@@ -10,6 +10,7 @@ import {
 } from './reducers/cartReducers';
 import {
   userLoginReducer,
+  userRegisterReducer
 } from './reducers/userReducers'
 
 
@@ -18,6 +19,7 @@ const reducer = combineReducers({
   productDetails: productDetailsReducer,
   cart: cartReducer,
   userLogin: userLoginReducer,
+  userRegister: userRegisterReducer
 })
 
 // Save cartItems into LS
