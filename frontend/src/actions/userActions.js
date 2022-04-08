@@ -6,7 +6,10 @@ import {
   USER_LOGOUT,
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
-  USER_REGISTER_FAIL
+  USER_REGISTER_FAIL,
+  USER_DETAILS_REQUEST,
+  USER_DETAILS_SUCCESS,
+  USER_DETAILS_FAIL
 } from "../constants/userConstants"
 
 
@@ -14,40 +17,37 @@ import {
  * 
  * (getState) = used for getting the token
  * 
- * */
-
+ * 
+ */
 
 
 
 export const login = (email, password) => async (dispatch) => {
   try {
     dispatch({
-      type: USER_LOGIN_REQUEST,
-      loading: true
-    })
+      type: USER_LOGIN_REQUEST
+    });
 
-    // We need to send config type when getting data through headers
+    // headers type
     const config = {
       headers: {
         'Content-Type': 'application/json'
       }
     }
 
-    // post(3 args) ('/',{email,pw}, config)
     const { data } = await axios.post(
-      '/api/users/login',
+      `/api/users/login`,
       { email, password },
       config
-    )
+    );
 
     dispatch({
       type: USER_LOGIN_SUCCESS,
       payload: data
-    })
+    });
 
-    // set to lcoalstorage
+    // set user to localstorage
     localStorage.setItem('userInfo', JSON.stringify(data))
-
   } catch (error) {
     dispatch({
       type: USER_LOGIN_FAIL,
@@ -58,25 +58,20 @@ export const login = (email, password) => async (dispatch) => {
   }
 }
 
-
-
+// logout action to logout
 export const logout = () => (dispatch) => {
-  localStorage.removeItem('userInfo')
-  dispatch({
-    type: USER_LOGOUT
-  })
+  localStorage.removeItem('userInfo');
+  dispatch({ type: USER_LOGOUT })
 }
-
-
 
 
 export const register = (name, email, password) => async (dispatch) => {
   try {
     dispatch({
-      type: USER_REGISTER_REQUEST,
-      loading: true
-    })
+      type: USER_REGISTER_REQUEST
+    });
 
+    // headers type
     const config = {
       headers: {
         'Content-Type': 'application/json'
@@ -84,23 +79,24 @@ export const register = (name, email, password) => async (dispatch) => {
     }
 
     const { data } = await axios.post(
-      '/api/users',
+      `/api/users`,
       { name, email, password },
       config
-    )
+    );
 
     dispatch({
       type: USER_REGISTER_SUCCESS,
       payload: data
-    })
-    // Login user right after user created
+    });
+
+    // login user right away
     dispatch({
       type: USER_LOGIN_SUCCESS,
       payload: data
-    })
+    });
 
+    // set user to localstorage
     localStorage.setItem('userInfo', JSON.stringify(data))
-
   } catch (error) {
     dispatch({
       type: USER_REGISTER_FAIL,
@@ -112,18 +108,15 @@ export const register = (name, email, password) => async (dispatch) => {
 }
 
 
-
-
-
 export const getUserDetails = (id) => async (dispatch, getState) => {
   try {
     dispatch({
       type: USER_DETAILS_REQUEST
-    })
+    });
 
-    // Destructure getState to get userInfo inside userLogin
     const { userLogin: { userInfo } } = getState()
-
+    // console.log(userInfo.token);
+    // headers type
     const config = {
       headers: {
         'Content-Type': 'application/json',
@@ -134,12 +127,14 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
     const { data } = await axios.get(
       `/api/users/${id}`,
       config
-    )
+    );
+
+    // console.log(data.name);
 
     dispatch({
       type: USER_DETAILS_SUCCESS,
       payload: data
-    })
+    });
 
   } catch (error) {
     dispatch({

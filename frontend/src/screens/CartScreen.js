@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useParams, useLocation, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap';
 import Message from '../components/Message';
 import { addToCart, removeFromCart } from '../actions/cartActions';
 
 
-const CartScreen = () => {
-  let params = useParams();
-  let location = useLocation();
-  let navigate = useNavigate();
+const CartScreen = ({ match, history, location }) => {
 
-  const productId = params.id
+  const productId = match.params.id
 
   // we only want the num thats after the = sign
   const qty = location.search ? Number(location.search.split('=')[1]) : 1
@@ -41,7 +38,7 @@ const CartScreen = () => {
   }
 
   const checkoutHandler = () => {
-    navigate('/login?redirect=shipping')
+    history.push('/login?redirect=shipping')
   }
 
   return (

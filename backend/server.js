@@ -36,13 +36,12 @@ app.use('/api/users', userRoutes)
 
 
 
-
 // NotFound Middleware
 app.use(notFound)
 // Error Middleware
 app.use(errorHandler)
 
 
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 8000
 
 app.listen(PORT, console.log(`Server running in ${process.env.NODE_ENV} port ${PORT}'`.yellow.bold))

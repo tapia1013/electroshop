@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
@@ -9,11 +9,11 @@ import { login } from '../actions/userActions';
 
 
 
-const LoginScreen = () => {
+const LoginScreen = ({ location, history }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const location = useLocation();
-  const navigate = useNavigate();
+  // const location = useLocation();
+  // const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -25,9 +25,9 @@ const LoginScreen = () => {
   // Check for userInfo if exists
   useEffect(() => {
     if (userInfo) {
-      navigate(redirect)
+      history.push(redirect)
     }
-  }, [navigate, userInfo, redirect])
+  }, [history, userInfo, redirect])
 
 
   const submitHandler = (e) => {

@@ -5,7 +5,7 @@ import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 import { logout } from '../actions/userActions';
 
 
-const Header = () => {
+const Header = ({ }) => {
   const dispatch = useDispatch();
 
   const userLogin = useSelector(state => state.userLogin)
@@ -49,7 +49,7 @@ const Header = () => {
                   )
                   : (
                     <LinkContainer to='/login'>
-                      <Nav.Link style={{ fontSize: '0.8rem', fontWeight: '700' }} href='/login'>
+                      <Nav.Link href='/login'>
                         <i className='fas fa-user'></i> Sign In
                       </Nav.Link>
                     </LinkContainer>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col, Image, Card, ListGroup, Button, Form } from 'react-bootstrap';
 import Rating from '../components/Rating';
@@ -8,15 +8,15 @@ import Loader from '../components/Loader';
 import Message from '../components/Message';
 
 
-const ProductScreen = () => {
+const ProductScreen = ({ history, match }) => {
   // [0,1,2,3,4,5] 
   // <option> 0 -> 1, then current is 1 + 1 -> 2 add another -> 3
   const [qty, setQty] = useState(1)
 
   // match.params replacement
-  const params = useParams();
+  // const params = useParams();
   // history.push replacement
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
 
   const dispatch = useDispatch()
@@ -25,12 +25,12 @@ const ProductScreen = () => {
   const { loading, error, product } = productDetails
 
   useEffect(() => {
-    dispatch(listProductDetails(params.id))
-  }, [dispatch, params])
+    dispatch(listProductDetails(match.params.id))
+  }, [dispatch, match]);
 
 
   const addToCartHandler = () => {
-    navigate(`/cart/${params.id}?qty=${qty}`)
+    history.push(`/cart/${match.params.id}?qty=${qty}`)
   }
 
   return (
