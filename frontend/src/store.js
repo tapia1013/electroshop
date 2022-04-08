@@ -11,7 +11,8 @@ import {
 import {
   userLoginReducer,
   userRegisterReducer,
-  userDetailsReducer
+  userDetailsReducer,
+  userUpdateProfileReducer
 } from './reducers/userReducers'
 
 
@@ -21,7 +22,8 @@ const reducer = combineReducers({
   cart: cartReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
-  userDetails: userDetailsReducer
+  userDetails: userDetailsReducer,
+  userUpdateProfile: userUpdateProfileReducer
 })
 
 // Save cartItems into LS
